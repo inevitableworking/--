@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html lang="en" class="light">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>OrderHub - Submit Order</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>📚</text></svg>">
+  <style>
+    html { scroll-behavior: smooth; }
+    @keyframes fadeIn { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: translateY(0); } }
+    .animate-fadeIn { animation: fadeIn 0.8s ease-in-out; }
+    .dark { background-color: #1f2937; color: #e5e7eb; }
+    .dark .bg-white { background-color: #374151; }
+    .dark .text-gray-700 { color: #d1d5db; }
+    .dark .bg-indigo-600 { background-color: #5b21b6; }
+    .dark .text-indigo-600 { color: #a78bfa; }
+  </style>
+</head>
+<body class="bg-gray-100 min-h-screen flex flex-col px-4 sm:px-6">
+  <!-- Navbar -->
+  <nav class="bg-indigo-600 text-white py-4 px-4 sm:px-6 sticky top-0 z-10 shadow">
+    <div class="max-w-5xl mx-auto flex justify-between items-center">
+      <a href="index.html" class="text-lg sm:text-xl font-bold">OrderHub</a>
+      <div class="flex items-center space-x-3">
+        <a href="index.html" class="text-sm hover:underline">Home</a>
+        <a href="services.html" class="text-sm hover:underline">Services</a>
+        <a href="order.html" class="text-sm hover:underline">Order</a>
+        <a href="track.html" class="text-sm hover:underline">Track</a>
+        <button id="theme-toggle" class="p-1 rounded-full hover:bg-indigo-700">
+          <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 20 20"><path d="M17.293 13.293A8 8 0 016.707 2.707a8.001 8.001 0 1010.586 10.586z"></path></svg>
+        </button>
+      </div>
+    </div>
+  </nav>
+
+  <!-- Order Form -->
+  <section class="max-w-md mx-auto py-8 animate-fadeIn">
+    <h1 class="text-2xl sm:text-3xl font-bold text-indigo-600 text-center">Submit Order</h1>
+    <div class="bg-white p-6 rounded-lg shadow mt-4">
+      <input id="name" type="text" placeholder="Name" class="w-full p-2 border rounded-lg mb-2 text-sm" required>
+      <input id="class" type="text" placeholder="Class/Grade" class="w-full p-2 border rounded-lg mb-2 text-sm" required>
+      <input id="subject" type="text" placeholder="Subject/Project" class="w-full p-2 border rounded-lg mb-2 text-sm" required>
+      <input id="pages" type="number" placeholder="Pages" class="w-full p-2 border rounded-lg mb-2 text-sm" required>
+      <input id="number" type="tel" placeholder="Phone Number" class="w-full p-2 border rounded-lg mb-2 text-sm" required>
+      <button id="submit-btn" onclick="submitOrder()" class="w-full bg-indigo-600 text-white py-2 rounded-lg hover:bg-indigo-700 text-sm">Confirm Order</button>
+      <div id="spinner" class="hidden text-center mt-2">
+        <div class="animate-spin rounded-full h-6 w-6 border-t-2 border-b-2 border-indigo-600 mx-auto"></div>
+        <p class="text-sm text-gray-700">Processing...</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- Footer -->
+  <footer class="bg-indigo-600 text-white py-4 px-4 sm:px-6 mt-6">
+    <div class="max-w-5xl mx-auto text-center">
+      <p class="text-sm">Follow us!</p>
+      <div class="flex justify-center space-x-4 mt-1">
+        <a href="https://x.com" target="_blank" class="text-sm hover:underline">Twitter</a>
+        <a href="https://instagram.com" target="_blank" class="text-sm hover:underline">Instagram</a>
+      </div>
+      <p class="text-xs mt-1">© 2025 OrderHub</p>
+    </div>
+  </footer>
+
+  <script>
+    // Dark Mode
+    const toggle = document.getElementById('theme-toggle');
+    toggle.addEventListener('click', () => {
+      document.documentElement.classList.toggle('dark');
+      localStorage.setItem('theme', document.documentElement.classList.contains('dark') ? 'dark' : 'light');
+    });
+    if (localStorage.getItem('theme') === 'dark') document.documentElement.classList.add('dark');
+
+    // Form Submission
+    function submitOrder() {
+      const name = document.getElementById('name').value;
+      const classGrade = document.getElementById('class').value;
+      const subject = document.getElementById('subject').value;
+      const pages = document.getElementById('pages').value;
+      const number = document.getElementById('number').value;
+      const submitBtn = document.getElementById('submit-btn');
+      const spinner = document.getElementById('spinner');
+
+      document.querySelectorAll('.error').forEach(el => el.remove());
+      let errors = [];
+      if (!name) errors.push({ id: 'name', msg: 'Name required' });
+      if (!classGrade) errors.push({ id: 'class', msg: 'Class required' });
+      if (!subject) errors.push({ id: 'subject', msg: 'Subject required' });
+      if (!pages || pages <= 0) errors.push({ id: 'pages', msg: 'Pages must be > 0' });
+      if (!number || !/^\d{10}$/.test(number)) errors.push({ id: 'number', msg: 'Enter 10-digit number' });
+
+      if (errors.length) {
+        errors.forEach(e => {
+          const err = document.createElement('div');
+          err.className = 'error text-red-500 text-xs mt-1';
+          err.textContent = e.msg;
+          document.getElementById(e.id).after(err);
+        });
+        return;
+      }
+
+      spinner.classList.remove('hidden');
+      submitBtn.disabled = true;
+      const message = `Order:\nName: ${name}\nClass: ${classGrade}\nSubject: ${subject}\nPages: ${pages}\nNumber: ${number}`;
+      const whatsappUrl = `https://api.whatsapp.com/send?phone=919407384878&text=${encodeURIComponent(message)}`;
+      const iframe = document.createElement('iframe');
+      iframe.style.display = 'none';
+      iframe.src = whatsappUrl;
+      document.body.appendChild(iframe);
+
+      setTimeout(() => {
+        spinner.classList.add('hidden');
+        submitBtn.disabled = false;
+        document.body.removeChild(iframe);
+        window.location.href = 'confirmation.html';
+      }, 500);
+    }
+  </script>
+</body>
+</html>

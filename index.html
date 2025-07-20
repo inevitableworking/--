@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html lang="en" class="light">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>OrderHub</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>📚</text></svg>">
+  <script async src="https://www.googletagmanager.com/gtag/js?id=UA-XXXXX-Y"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+    gtag('config', 'UA-XXXXX-Y');
+  </script>
+  <style>
+    html { scroll-behavior: smooth; }
+    @keyframes fadeIn { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: translateY(0); } }
+    .animate-fadeIn { animation: fadeIn 0.8s ease-in-out; }
+    .dark { background-color: #1f2937; color: #e5e7eb; }
+    .dark .bg-white { background-color: #374151; }
+    .dark .text-gray-700 { color: #d1d5db; }
+    .dark .bg-indigo-600 { background-color: #5b21b6; }
+    .dark .text-indigo-600 { color: #a78bfa; }
+    .dark .bg-black { background-color: #111827; }
+  </style>
+</head>
+<body class="bg-cover bg-center min-h-screen flex flex-col px-4 sm:px-6" style="background-image: url('https://images.unsplash.com/photo-1456513080510-7bf3a84b82f8?auto=format&fit=crop&w=1350&q=80');">
+  <div class="absolute inset-0 bg-black opacity-30 z-[-1]"></div>
+
+  <!-- Navbar -->
+  <nav class="bg-indigo-600 text-white py-4 px-4 sm:px-6 sticky top-0 z-10 shadow">
+    <div class="max-w-5xl mx-auto flex justify-between items-center">
+      <a href="index.html" class="text-lg sm:text-xl font-bold">OrderHub</a>
+      <div class="flex items-center space-x-3">
+        <a href="index.html" class="text-sm hover:underline">Home</a>
+        <a href="services.html" class="text-sm hover:underline">Services</a>
+        <a href="order.html" class="text-sm hover:underline">Order</a>
+        <a href="track.html" class="text-sm hover:underline">Track</a>
+        <button id="theme-toggle" class="p-1 rounded-full hover:bg-indigo-700">
+          <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 20 20"><path d="M17.293 13.293A8 8 0 016.707 2.707a8.001 8.001 0 1010.586 10.586z"></path></svg>
+        </button>
+      </div>
+    </div>
+  </nav>
+
+  <!-- Welcome -->
+  <header class="text-center py-8 animate-fadeIn">
+    <h1 class="text-3xl sm:text-4xl font-bold text-indigo-600">Welcome to OrderHub</h1>
+    <p class="text-sm sm:text-base text-gray-700 mt-2">Submit your academic and project orders effortlessly!</p>
+    <a href="order.html" class="mt-4 inline-block bg-indigo-600 text-white py-2 px-4 rounded-lg hover:bg-indigo-700 text-sm">Order Now</a>
+  </header>
+
+  <!-- About -->
+  <section class="max-w-3xl mx-auto text-center px-4 my-6 animate-fadeIn">
+    <h2 class="text-xl sm:text-2xl font-bold text-indigo-600">About Us</h2>
+    <p class="text-gray-700 text-sm sm:text-base">OrderHub offers a seamless way to submit assignments and projects. Fill out our form, and we’ll handle the rest with care.</p>
+  </section>
+
+  <!-- Testimonials -->
+  <section class="max-w-3xl mx-auto px-4 my-6">
+    <h2 class="text-xl sm:text-2xl font-bold text-indigo-600 text-center">Testimonials</h2>
+    <div class="grid grid-cols-1 sm:grid-cols-2 gap-4 mt-4">
+      <div class="bg-white p-4 rounded-lg shadow animate-fadeIn">
+        <p class="text-gray-700 text-sm">"Fast and professional service!"</p>
+        <p class="text-indigo-600 font-semibold mt-1">- John D.</p>
+      </div>
+      <div class="bg-white p-4 rounded-lg shadow animate-fadeIn">
+        <p class="text-gray-700 text-sm">"Super easy to use!"</p>
+        <p class="text-indigo-600 font-semibold mt-1">- Sarah K.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- FAQ -->
+  <section class="max-w-3xl mx-auto px-4 my-6">
+    <h2 class="text-xl sm:text-2xl font-bold text-indigo-600 text-center">FAQs</h2>
+    <div class="space-y-4 mt-4">
+      <div class="bg-white p-4 rounded-lg shadow">
+        <h3 class="text-base font-semibold text-indigo-600">Processing Time?</h3>
+        <p class="text-gray-700 text-sm">1-2 business days.</p>
+      </div>
+      <div class="bg-white p-4 rounded-lg shadow">
+        <h3 class="text-base font-semibold text-indigo-600">Project Types?</h3>
+        <p class="text-gray-700 text-sm">Assignments, essays, and more.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- Contact -->
+  <section class="max-w-3xl mx-auto px-4 my-6 text-center animate-fadeIn">
+    <h2 class="text-xl sm:text-2xl font-bold text-indigo-600">Contact Us</h2>
+    <p class="text-gray-700 text-sm sm:text-base">Questions? Reach out!</p>
+    <a href="mailto:support@orderhub.example" class="mt-2 inline-block bg-indigo-600 text-white py-2 px-4 rounded-lg hover:bg-indigo-700 text-sm">Email Us</a>
+  </section>
+
+  <!-- Back-to-Top -->
+  <button id="back-to-top" class="fixed bottom-4 right-4 bg-indigo-600 text-white p-2 rounded-full shadow hover:bg-indigo-700 hidden">
+    <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M3.293 9.707a1 1 0 010-1.414l6-6a1 1 0 011.414 0l6 6a1 1 0 01-1.414 1.414L11 5.414V17a1 1 0 11-2 0V5.414L4.707 9.707a1 1 0 01-1.414 0z" clip-rule="evenodd"></path></svg>
+  </button>
+
+  <!-- Footer -->
+  <footer class="bg-indigo-600 text-white py-4 px-4 sm:px-6 mt-6">
+    <div class="max-w-5xl mx-auto text-center">
+      <p class="text-sm">Follow us!</p>
+      <div class="flex justify-center space-x-4 mt-1">
+        <a href="https://x.com" target="_blank" class="text-sm hover:underline">Twitter</a>
+        <a href="https://instagram.com" target="_blank" class="text-sm hover:underline">Instagram</a>
+      </div>
+      <p class="text-xs mt-1">© 2025 OrderHub</p>
+    </div>
+  </footer>
+
+  <script>
+    // Dark Mode
+    const toggle = document.getElementById('theme-toggle');
+    toggle.addEventListener('click', () => {
+      document.documentElement.classList.toggle('dark');
+      localStorage.setItem('theme', document.documentElement.classList.contains('dark') ? 'dark' : 'light');
+    });
+    if (localStorage.getItem('theme') === 'dark') document.documentElement.classList.add('dark');
+
+    // Back-to-Top
+    const backToTop = document.getElementById('back-to-top');
+    window.addEventListener('scroll', () => {
+      backToTop.classList.toggle('hidden', window.scrollY < 200);
+    });
+    backToTop.addEventListener('click', () => window.scrollTo({ top: 0, behavior: 'smooth' }));
+  </script>
+</body>
+</html>
